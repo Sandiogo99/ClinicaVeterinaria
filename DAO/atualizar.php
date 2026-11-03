@@ -3,7 +3,7 @@
     use ClinicaVeterinaria\projeto\DAO\Conexao;
 
     Class Atualizar{
-        function atualizar(Conexao $conexao,
+        function atualizarVeterinario(Conexao $conexao,
                            int $codigo,
                            string $campo,
                            string $novoDado)
@@ -17,8 +17,33 @@
                 } 
                 return "<br><br>Dado não atualizado!";
             }catch(Exception $erro){
-                return "<br><br>Algo deu errado<br><br> $erro";
+                return "<br><br>Algo deu errado<br><br>".$erro->getMessage();
             }
-        }//fim do método
+        }  function atualizarTutor(Conexao $conexao, int $codigo, string $campo, string $novoDado){
+        try{
+            $conn = $conexao->conectar();
+            $sql = "update tutor set $campo = '$novoDado' where codigo = '$codigo'";
+            $result = mysqli_query($conn, $sql);
+            if($result){
+                return "<br><br>Dado do Tutor atualizado!";
+            }
+            return "<br><br>Dado não atualizado!";
+        }catch(\Exception $erro){
+            return "<br><br>Algo deu errado<br><br>".$erro->getMessage();
+        }
+    }
+
+    function atualizarAnimal(Conexao $conexao, int $codigo, string $campo, string $novoDado){
+        try{
+            $conn = $conexao->conectar();
+            $sql = "update animal set $campo = '$novoDado' where codigo = '$codigo'";
+            $result = mysqli_query($conn, $sql);
+            if($result){
+                return "<br><br>Dado do Animal atualizado!";
+            }
+            return "<br><br>Dado não atualizado!";
+        }catch(\Exception $erro){
+            return "<br><br>Algo deu errado<br><br>".$erro->getMessage();
+        } //fim do método
     }//fim da classe
-?>
+    }

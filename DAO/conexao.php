@@ -14,7 +14,7 @@
             }
             catch(Exception $erro)
             {
-                echo "Algo deu errado " + $erro;
+                echo "Algo deu errado " + $erro->message();
             }//fim do catch
         }//fim do conectar
     }//fim da conexao

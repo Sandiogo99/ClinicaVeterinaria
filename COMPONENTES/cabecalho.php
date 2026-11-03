@@ -1,28 +1,48 @@
-<?php
-    namespace ClinicaVeterinaria\projeto\Componentes;
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL" crossorigin="anonymous"></script>
-</head>
-<body>
-    <ul class="nav nav-tabs">
+<ul class="nav nav-tabs mb-4">
+       <!-- Início -->
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="html/telaVeterinario.php">Cadastrar</a>
+            <a class="nav-link bg-white text-dark fw-bold" href="../index.php">Início</a>
+        </li>
+
+        <!-- Abas Veterinário -->
+        <li class="nav-item">
+            <a class="nav-link" href="telaVeterinario.php">Cadastrar Vet</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="html/consultarVeterinario.php">Consultar</a>
+            <a class="nav-link" href="consultarVeterinario.php">Consultar Vet</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="html/atualizarVeterinario.php">Atualizar</a>
+            <a class="nav-link" href="atualizarVeterinario.php">Atualizar Vet</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="html/excluirVeterinario.php">Excluir</a>
+            <a class="nav-link" href="excluirVeterinario.php">Excluir Vet</a>
         </li>
-    </ul>
-</body>
-</html>
+
+        <!-- Abas Tutor -->
+        <li class="nav-item">
+            <a class="nav-link" href="telaTutor.php">Cadastrar Tutor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="consultarTutor.php">Consultar Tutor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="atualizarTutor.php">Atualizar Tutor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="excluirTutor.php">Excluir Tutor</a>
+        </li>
+
+        <!-- Abas Animal -->
+        <li class="nav-item">
+            <a class="nav-link" href="telaAnimal.php">Cadastrar Animal</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="consultarAnimal.php">Consultar Animal</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="atualizarAnimal.php">Atualizar Animal</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="excluirAnimal.php">Excluir Animal</a>
+        </li>
+</ul>

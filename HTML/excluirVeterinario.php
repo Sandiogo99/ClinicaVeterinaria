@@ -9,29 +9,47 @@
     $conexao = new Conexao();
     $excluir = new Excluir();
     $resultado = "";
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
+    $codigo = (int)$_POST['codigo'];
+    $resultado = $excluir->excluirVeterinario($conexao, $codigo);
+    }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
     <title>Excluir Veterinário</title>
 </head>
-<body>
+
+<body class="container py-4 bg-white text-dark">
+    <?php include('../COMPONENTES/cabecalho.php'); ?>
+
     <h1>Excluir Veterinário</h1>
+
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item"><a class="nav-link" href="telaVeterinario.php">Cadastrar</a></li>
+        <li class="nav-item"><a class="nav-link" href="consultarVeterinario.php">Consultar</a></li>
+        <li class="nav-item"><a class="nav-link" href="atualizarVeterinario.php">Atualizar</a></li>
+        <li class="nav-item"><a class="nav-link active" href="excluirVeterinario.php">Excluir</a></li>
+    </ul>
+
     <form method="POST">
         <label>Código</label>
         <input type="number" id="codigo" name="codigo"/>
-        <button type="submit">Excluir
-            <?php
-                $codigo = $_POST['codigo'];
-                $resultado = $excluir->excluirVeterinario($conexao, $codigo);
-            ?>
-        </button>
+        <button type="submit" class="btn btn-danger">Excluir</button>
+
     </form>
-    <?php
-        echo $resultado;
-    ?>
-    <a href="../index.php"><button>Voltar</button></a>
+    <div class="mt-3">
+        <?php echo $resultado; ?>
+    </div>
+  <a href="../index.php" class="btn btn-secondary mt-3">Voltar</a>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,73 @@
+<?php
+namespace ClinicaVeterinaria\projeto\HTML;
+
+use ClinicaVeterinaria\projeto\DAO\Conexao;
+use ClinicaVeterinaria\projeto\DAO\Consultar;
+
+require_once __DIR__ . '/../DAO/conexao.php';
+require_once __DIR__ . '/../DAO/consultar.php';
+
+$conexao = new Conexao();
+$consultar = new Consultar();
+$resultado = null;
+$codigoInformado = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codigoInformado = $_POST['codigo'] ?? '';
+    $codigo = is_string($codigoInformado)
+        ? filter_var($codigoInformado, FILTER_VALIDATE_INT)
+        : false;
+
+    if ($codigo === false || $codigo < 1) {
+        $resultado = 'Informe um código válido.';
+    } else {
+        $resultado = $consultar->consultarAnimal($conexao, $codigo);
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Consultar Animal</title>
+</head>
+<body class="container py-4 bg-white text-dark">
+    <?php include __DIR__ . '/../COMPONENTES/cabecalho.php'; ?>
+
+    <h1>Consultar Animal</h1>
+
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item"><a class="nav-link" href="telaAnimal.php">Cadastrar</a></li>
+        <li class="nav-item"><a class="nav-link active" href="consultarAnimal.php" aria-current="page">Consultar</a></li>
+        <li class="nav-item"><a class="nav-link" href="atualizarAnimal.php">Atualizar</a></li>
+        <li class="nav-item"><a class="nav-link" href="excluirAnimal.php">Excluir</a></li>
+    </ul>
+
+    <form method="POST" action="consultarAnimal.php">
+        <label for="codigo">Código:</label><br>
+        <input type="number" id="codigo" name="codigo" min="1" required
+               value="<?= htmlspecialchars(is_string($codigoInformado) ? $codigoInformado : '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><br><br>
+        <button type="submit" class="btn btn-warning">Consultar</button>
+    </form>
+
+    <?php if ($resultado !== null): ?>
+        <div class="mt-3" role="status">
+            <?php
+            $linhasResultado = preg_split('/<br\s*\/?>/i', $resultado);
+            foreach ($linhasResultado as $indice => $linha):
+                if ($indice > 0) {
+                    echo '<br>';
+                }
+                echo htmlspecialchars($linha, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            endforeach;
+            ?>
+        </div>
+    <?php endif; ?>
+
+    <a href="../index.php" class="btn btn-secondary mt-3">Voltar</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
