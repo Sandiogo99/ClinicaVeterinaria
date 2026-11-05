@@ -1,24 +1,23 @@
 <?php
-    namespace ClinicaVeterinaria\projeto\DAO;
+namespace ClinicaVeterinaria\projeto\DAO;
 
-    class Conexao{
-        function conectar(){
-            try{
-                $conn = mysqli_connect('localhost', 'root', '', 'clinicaVeterinaria');
-                if($conn){
-                    return $conn;
-                    echo "Conectado!";
-                }else{
-                    echo "Conexão Falhou!";
-                }
-            }
-            catch(Exception $erro)
-            {
-                echo "Algo deu errado " + $erro->message();
-            }//fim do catch
-        }//fim do conectar
-    }//fim da conexao
+class Conexao
+{
+    public function conectar(): \mysqli
+    {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+        try {
+            $conn = new \mysqli('localhost', 'root', '', 'clinicaVeterinaria');
+            $conn->set_charset('utf8mb4');
 
-
-?>
+            return $conn;
+        } catch (\mysqli_sql_exception $erro) {
+            throw new \RuntimeException(
+                'Não foi possível conectar ao banco de dados. Verifique se o MySQL está ativo e as credenciais estão corretas.',
+                0,
+                $erro
+            );
+        }
+    }
+}
