@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Atualizar Veterinario</title>
 </head>
 <body class="container py-4 bg-white text-dark">
-    <?php include __DIR__ . '/../COMPONENTES/cabecalho.php'; ?>
+    <?php // include __DIR__ . '/../COMPONENTES/cabecalho.php'; ?>
     <h1>Atualizar Veterinário</h1>
     <ul class="nav nav-tabs mb-4">
         <li class="nav-item"><a class="nav-link" href="telaVeterinario.php">Cadastrar</a></li>

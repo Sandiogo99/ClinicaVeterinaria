@@ -26,15 +26,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
     <title>Atualizar Animal</title>
 </head>
 <body class="container py-4 bg-white text-dark">
-    <?php include('../COMPONENTES/cabecalho.php'); ?>
+    <?php // include('../COMPONENTES/cabecalho.php'); ?>
 
     <h1>Atualizar Animal</h1>
 
     <ul class="nav nav-tabs mb-4">
-        <li class="nav-item"><a class="nav-link" href="telaAnimal.php">Cadastrar</a></li>
-        <li class="nav-item"><a class="nav-link" href="consultarAnimal.php">Consultar</a></li>
-        <li class="nav-item"><a class="nav-link active" href="atualizarAnimal.php">Atualizar</a></li>
-        <li class="nav-item"><a class="nav-link" href="excluirAnimal.php">Excluir</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="telaAnimal.php">Cadastrar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="consultarAnimal.php">Consultar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="atualizarAnimal.php">Atualizar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="excluirAnimal.php">Excluir</a>
+        </li>
     </ul>
 
     <form method="POST">

@@ -27,7 +27,7 @@
 </head>
 
 <body class="container py-4 bg-white text-dark">
-    <?php include('../COMPONENTES/cabecalho.php'); ?>
+    <?php // include('../COMPONENTES/cabecalho.php'); ?>
 
     <h1>Excluir Veterinário</h1>
 

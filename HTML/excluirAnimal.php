@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
     <title>Excluir Animal</title>
 </head>
 <body class="container py-4 bg-white text-dark">
-    <?php include('../COMPONENTES/cabecalho.php'); ?>
+    <?php // include('../COMPONENTES/cabecalho.php'); ?>
 
     <h1>Excluir Animal</h1>
 

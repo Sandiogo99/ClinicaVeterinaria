@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Consultar Animal</title>
 </head>
 <body class="container py-4 bg-white text-dark">
-    <?php include __DIR__ . '/../COMPONENTES/cabecalho.php'; ?>
+    <?php // include __DIR__ . '/../COMPONENTES/cabecalho.php'; ?>
 
     <h1>Consultar Animal</h1>
 

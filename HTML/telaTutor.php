@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
     <title>Cadastro Tutor</title>
 </head>
 <body class="container py-4 bg-white text-dark">
-    <?php include('../COMPONENTES/cabecalho.php'); ?>
+    <?php // include('../COMPONENTES/cabecalho.php'); ?>
     
     <h1>Cadastro Tutor</h1>
 

@@ -6,24 +6,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Bem-Vindo!</title>
 </head>
-<body class="container py-4 bg-white text-dark">
-    <h1>Bem-Vindo! Escolha o que deseja fazer: </h1>
-    <ul class="nav nav-tabs mb-4">
-        <li class="nav-item"><a class="nav-link" href="HTML/telaVeterinario.php">Cadastrar Veterinário</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/consultarVeterinario.php">Consultar Veterinário</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/atualizarVeterinario.php">Atualizar Veterinário</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/excluirVeterinario.php">Excluir Veterinário</a></li>
-
-        <li class="nav-item"><a class="nav-link" href="HTML/telaTutor.php">Cadastrar Tutor</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/consultarTutor.php">Consultar Tutor</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/atualizarTutor.php">Atualizar Tutor</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/excluirTutor.php">Excluir Tutor</a></li>
-
-        <li class="nav-item"><a class="nav-link" href="HTML/telaAnimal.php">Cadastrar Animal</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/consultarAnimal.php">Consultar Animal</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/atualizarAnimal.php">Atualizar Animal</a></li>
-        <li class="nav-item"><a class="nav-link" href="HTML/excluirAnimal.php">Excluir Animal</a></li>  
-    </ul>
+<body class="container min-vh-100 d-flex flex-column justify-content-center py-4 bg-white text-dark">
+    <h1 class="mb-4 text-center">Bem-vindo ao</h1>
+    <h1 class="mb-4 text-center">Pet Center Animal</h1>
+    <div class="row w-100 justify-content-center g-4">
+        <section class="col-12 col-sm-8 col-md-4 col-lg-3" aria-labelledby="menu-veterinario">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-grid p-4">
+                    <a class="btn btn-success btn-lg py-4 fs-3" id="menu-veterinario" href="HTML/telaVeterinario.php">Veterinário</a>
+                </div>
+            </div>
+        </section>
+        <section class="col-12 col-sm-8 col-md-4 col-lg-3" aria-labelledby="menu-tutor">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-grid p-4">
+                    <a class="btn btn-primary btn-lg py-4 fs-3" id="menu-tutor" href="HTML/telaTutor.php">Tutor</a>
+                </div>
+            </div>
+        </section>
+        <section class="col-12 col-sm-8 col-md-4 col-lg-3" aria-labelledby="menu-animal">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-grid p-4">
+                    <a class="btn btn-danger btn-lg py-4 fs-3" id="menu-animal" href="HTML/telaAnimal.php">Animal</a>
+                </div>
+            </div>
+        </section>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
