@@ -1,12 +1,13 @@
 body{
     background-image: url('../imagens/melhorcachorro.jpg');
     background-repeat: no-repeat;
+    background-color: #999;
             
-        } 
+} 
 
 #animal{
-    background-image: url('../imagens/animal1.jpg');
-    
+    background-image: url('../imagens/animal4.jpg');
+    background-color: #777;
 }
 
 #tutor{
@@ -14,12 +15,12 @@ body{
     background-repeat: no-repeat;
    
 }
+
 #veterinario{
     background-image: url('../imagens/veterinario3.jpg');
-    background-repeat: no-repeat;
-   
-   
+    background-repeat: no-repeat;  
 }
+
 h1{
     color:#fff;
 }
