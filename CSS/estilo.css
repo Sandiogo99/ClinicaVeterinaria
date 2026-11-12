@@ -1,0 +1,29 @@
+body{
+    background-image: url('../imagens/melhorcachorro.jpg');
+    background-repeat: no-repeat;
+            
+        } 
+
+#animal{
+    background-image: url('../imagens/animal1.jpg');
+    
+}
+
+#tutor{
+    background-image: url('../imagens/tutor2.jpg');
+    background-repeat: no-repeat;
+   
+}
+#veterinario{
+    background-image: url('../imagens/veterinario3.jpg');
+    background-repeat: no-repeat;
+   
+   
+}
+h1{
+    color:#fff;
+}
+
+form{
+    margin-top: 20px;    
+}

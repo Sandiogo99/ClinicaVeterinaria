@@ -26,11 +26,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/estilo.css">
     <title>Cadastro Animal</title>
 </head>
-<body class="container py-4 bg-white text-dark">
+<body id="animal" class="container py-4 bg-white text-dark">
     <?php // include('../COMPONENTES/cabecalho.php'); ?>
-    
+    <div id="cabecalho">
     <h1>Cadastro Animal</h1>
 
     <ul class="nav nav-tabs mb-4">
@@ -39,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
         <li class="nav-item"><a class="nav-link" href="atualizarAnimal.php">Atualizar</a></li>
         <li class="nav-item"><a class="nav-link" href="excluirAnimal.php">Excluir</a></li>
     </ul>
+    </div>
 
     <form method="POST">
         <label>Nome do Pet:</label><br>
