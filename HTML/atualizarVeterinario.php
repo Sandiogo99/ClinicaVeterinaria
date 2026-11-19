@@ -28,12 +28,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ) {
         $resultado = 'Informe um código, campo e novo dado válidos.';
     } else {
+        if ($campo === 'salario') {
+            $salario = filter_var(trim($novoDado), FILTER_VALIDATE_FLOAT);
+            if ($salario === false || $salario < 0) {
+                $resultado = 'O salário deve ser um número maior ou igual a zero.';
+            } else {
+                $resultado = $atualizar->atualizarVeterinario(
+                    $conexao,
+                    $codigo,
+                    $campo,
+                    (string)$salario
+                );
+            }
+        } else {
         $resultado = $atualizar->atualizarVeterinario(
             $conexao,
             $codigo,
             $campo,
             trim($novoDado)
         );
+        }
     }
 }
 ?>
@@ -57,10 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </ul>
 
     <form method="POST" action="atualizarVeterinario.php">
-        <label for="codigo">Código</label>
+        <label for="codigo" class="form-label text-white">Código</label>
         <input type="number" id="codigo" name="codigo" min="1" required><br><br>
 
-        <label for="campo">Escolha o campo que deseja atualizar</label>
+        <label for="campo" class="form-label text-white">Escolha o campo que deseja atualizar</label>
         <select name="campo" id="campo" required>
             <option value="nome">Nome</option>
             <option value="telefone">Telefone</option>
@@ -69,17 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="salario">Salário</option>
         </select><br><br>
 
-        <label for="novoDado">Informe o novo dado:</label>
+        <label for="novoDado" class="form-label text-white">Informe o novo dado:</label>
         <input type="text" name="novoDado" id="novoDado" required><br><br>
 
-        <button type="submit">Atualizar</button>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
     <?php if ($resultado !== null): ?>
         <div class="mt-3" role="status">
             <?= htmlspecialchars(strip_tags(str_replace('<br>', "\n", $resultado)), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
         </div>
     <?php endif; ?>
-    <a href="../index.php"><button>Voltar</button></a>
+    <a href="../index.php"><button class="btn btn-secondary">Voltar</button></a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

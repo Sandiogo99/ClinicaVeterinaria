@@ -11,13 +11,22 @@ $inserir = new Inserir();
 $mensagem = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
-    $nome = $_POST['nome'];
-    $cpf = $_POST['cpf'];
-    $telefone = $_POST['telefone'];
-    $email = $_POST['email'];
-    $endereco = $_POST['endereco'];
+    $nome = trim($_POST['nome']);
+    $cpf = trim($_POST['cpf']);
+    $telefone = trim($_POST['telefone']);
+    $email = trim($_POST['email']);
+    $endereco = trim($_POST['endereco']);
+    $cpfNumerico = preg_replace('/\D/', '', $cpf);
 
-    $mensagem = $inserir->cadastrarTutor($conexao, $nome, $cpf, $telefone, $email, $endereco);
+    if ($nome === '' || $cpf === '' || $telefone === '' || $email === '' || $endereco === '') {
+        $mensagem = 'Preencha todos os campos.';
+    } elseif (strlen($cpfNumerico) !== 11) {
+        $mensagem = 'Informe um CPF válido com 11 dígitos.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mensagem = 'Informe um endereço de e-mail válido.';
+    } else {
+        $mensagem = $inserir->cadastrarTutor($conexao, $nome, $cpfNumerico, $telefone, $email, $endereco);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -42,20 +51,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
     </ul>
 
     <form method="POST">
-        <label>Nome:</label><br>
-        <input type="text" id="nome" name="nome"/><br><br>
+        <label for="nome" class="form-label text-white">Nome:</label><br>
+        <input type="text" id="nome" name="nome" class="form-control" maxlength="250" required/><br><br>
 
-        <label>CPF:</label><br>
-        <input type="text" id="cpf" name="cpf"/><br><br>
+        <label for="cpf" class="form-label text-white">CPF:</label><br>
+        <input type="text" id="cpf" name="cpf" class="form-control" maxlength="14" pattern="[0-9.\-]{11,14}" required/><br><br>
 
-        <label>Telefone:</label><br>
-        <input type="text" id="telefone" name="telefone"/><br><br>
+        <label for="telefone" class="form-label text-white">Telefone:</label><br>
+        <input type="tel" id="telefone" name="telefone" class="form-control" maxlength="20" required/><br><br>
 
-        <label>Email:</label><br>
-        <input type="email" id="email" name="email"/><br><br>
+        <label for="email" class="form-label text-white">Email:</label><br>
+        <input type="email" id="email" name="email" class="form-control" maxlength="150" required/><br><br>
 
-        <label>Endereço:</label><br>
-        <input type="text" id="endereco" name="endereco"/><br><br>
+        <label for="endereco" class="form-label text-white">Endereço:</label><br>
+        <input type="text" id="endereco" name="endereco" class="form-control" maxlength="300" required/><br><br>
 
         <button type="submit" class="btn btn-success">Cadastrar</button>
     </form>

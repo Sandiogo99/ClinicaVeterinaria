@@ -11,10 +11,26 @@ $atualizar = new Atualizar();
 $resultado = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
-    $codigo = (int)$_POST['codigo'];
-    $campo = $_POST['campo'];
-    $novoDado = $_POST['novoDado'];
-    $resultado = $atualizar->atualizarAnimal($conexao, $codigo, $campo, $novoDado);
+    $codigo = filter_var($_POST['codigo'], FILTER_VALIDATE_INT);
+    $campo = $_POST['campo'] ?? '';
+    $novoDado = trim($_POST['novoDado'] ?? '');
+    $camposPermitidos = ['nome', 'especie', 'raca', 'idade', 'codigoTutor'];
+
+    if ($codigo === false || $codigo < 1 || !in_array($campo, $camposPermitidos, true) || $novoDado === '') {
+        $resultado = 'Informe um código, campo e novo dado válidos.';
+    } elseif (in_array($campo, ['idade', 'codigoTutor'], true)) {
+        $valor = filter_var($novoDado, FILTER_VALIDATE_INT);
+        $limite = $campo === 'idade' ? 0 : 1;
+        if ($valor === false || $valor < $limite) {
+            $resultado = $campo === 'idade'
+                ? 'A idade deve ser um número inteiro maior ou igual a zero.'
+                : 'Informe um código de tutor válido maior que zero.';
+        } else {
+            $resultado = $atualizar->atualizarAnimal($conexao, $codigo, $campo, (string)$valor);
+        }
+    } else {
+        $resultado = $atualizar->atualizarAnimal($conexao, $codigo, $campo, $novoDado);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -47,11 +63,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
     </ul>
 
     <form method="POST">
-        <label>Código:</label><br>
-        <input type="number" id="codigo" name="codigo"/><br><br>
+        <label for="codigo" class="form-label text-dark">Código:</label><br>
+        <input type="number" id="codigo" name="codigo" class="form-control" min="1" required/><br><br>
 
-        <label>Escolha o campo que deseja atualizar</label><br>
-        <select name="campo" id="campo">
+        <label for="campo" class="form-label text-dark">Escolha o campo que deseja atualizar</label><br>
+        <select name="campo" id="campo" class="form-control" required>
             <option value="nome">Nome</option>
             <option value="especie">Espécie</option>
             <option value="raca">Raça</option>
@@ -59,8 +75,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
             <option value="codigoTutor">Código Tutor</option>
         </select><br><br>
 
-        <label>Informe o novo dado:</label><br>
-        <input type="text" name="novoDado" id="novoDado"/><br><br>
+        <label for="novoDado" class="form-label text-dark">Informe o novo dado:</label><br>
+        <input type="text" name="novoDado" id="novoDado" class="form-control"/><br><br>
 
         <button type="submit" class="btn btn-warning">Atualizar</button>
     </form>

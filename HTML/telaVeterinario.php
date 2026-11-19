@@ -61,31 +61,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form method="POST" action="telaVeterinario.php">
         <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
+            <label for="nome" class="form-label text-white">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" maxlength="250" required
                    value="<?= htmlspecialchars($dadosFormulario['nome'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
         </div>
         <div class="mb-3">
-            <label for="especialidade" class="form-label">Especialidade:</label>
+            <label for="especialidade" class="form-label text-white">Especialidade:</label>
             <input type="text" class="form-control" id="especialidade" name="especialidade" maxlength="100" required
                    value="<?= htmlspecialchars($dadosFormulario['especialidade'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
         </div>
         <div class="mb-3">
-            <label for="salario" class="form-label">Salário:</label>
+            <label for="salario" class="form-label text-white">Salário:</label>
             <input type="number" class="form-control" id="salario" name="salario" min="0" step="0.01" required
                    value="<?= htmlspecialchars($dadosFormulario['salario'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
         </div>
         <div class="mb-3">
-            <label for="telefone" class="form-label">Telefone:</label>
+            <label for="telefone" class="form-label text-white">Telefone:</label>
             <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="20" required
                    value="<?= htmlspecialchars($dadosFormulario['telefone'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
         </div>
         <div class="mb-3">
-            <label for="endereco" class="form-label">Endereço:</label>
+            <label for="endereco" class="form-label text-white">Endereço:</label>
             <input type="text" class="form-control" id="endereco" name="endereco" maxlength="300" required
                    value="<?= htmlspecialchars($dadosFormulario['endereco'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
         </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="submit" class="btn btn-primary text-white">Cadastrar</button>
         <a href="../index.php" class="btn btn-secondary">Voltar</a>
     </form>
 

@@ -52,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </li>
     </ul>
     <form method="POST" action="consultarVeterinario.php">
-        <label for="codigo">Código:</label>
+        <label for="codigo" class="form-label text-white">Código:</label>
         <input type="number" id="codigo" name="codigo" min="1" required
                value="<?= htmlspecialchars(is_string($codigoInformado) ? $codigoInformado : '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
         <br><br>
-        <button type="submit">Consultar</button>
+        <button type="submit" class="btn btn-primary">Consultar</button>
     </form> 
     <?php if ($resultado !== null): ?>
         <div class="mt-3" role="status">

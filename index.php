@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/estilo.css">
+    <link rel="stylesheet" href="CSS/estilo1.css">
     <title>Bem-Vindo!</title>
 </head>
-<body class="container min-vh-100 d-flex flex-column justify-content-center py-4 bg-white text-dark">
+<body class="container min-vh-100 d-flex flex-column justify-content-center py-4 text-dark">
     <h1 class="mb-4 text-center">Bem-vindo ao</h1>
     <h1 class="mb-4 text-center">Pet Center Animal</h1>
     <div class="row w-100 justify-content-center g-4">

@@ -11,8 +11,12 @@ $consultar = new Consultar();
 $resultado = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
-    $codigo = (int)$_POST['codigo'];
-    $resultado = $consultar->consultarTutor($conexao, $codigo);
+    $codigo = filter_var($_POST['codigo'], FILTER_VALIDATE_INT);
+    if ($codigo === false || $codigo < 1) {
+        $resultado = 'Informe um código válido maior que zero.';
+    } else {
+        $resultado = $consultar->consultarTutor($conexao, $codigo);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -38,8 +42,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
     </ul>
 
     <form method="POST">
-        <label>Código:</label><br>
-        <input type="number" id="codigo" name="codigo"/><br><br>
+        <label for="codigo" class="form-label text-white">Código:</label><br>
+        <input type="number" id="codigo" name="codigo" class="form-control" min="1" required/><br><br>
         <button type="submit" class="btn btn-success">Consultar</button>
     </form>
 

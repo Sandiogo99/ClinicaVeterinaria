@@ -11,10 +11,23 @@ $atualizar = new Atualizar();
 $resultado = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
-    $codigo = (int)$_POST['codigo'];
-    $campo = $_POST['campo'];
-    $novoDado = $_POST['novoDado'];
-    $resultado = $atualizar->atualizarTutor($conexao, $codigo, $campo, $novoDado);
+    $codigo = filter_var($_POST['codigo'], FILTER_VALIDATE_INT);
+    $campo = $_POST['campo'] ?? '';
+    $novoDado = trim($_POST['novoDado'] ?? '');
+    $camposPermitidos = ['nome', 'cpf', 'telefone', 'email', 'endereco'];
+
+    if ($codigo === false || $codigo < 1 || !in_array($campo, $camposPermitidos, true) || $novoDado === '') {
+        $resultado = 'Informe um código, campo e novo dado válidos.';
+    } elseif ($campo === 'cpf' && strlen(preg_replace('/\D/', '', $novoDado)) !== 11) {
+        $resultado = 'Informe um CPF válido com 11 dígitos.';
+    } elseif ($campo === 'email' && !filter_var($novoDado, FILTER_VALIDATE_EMAIL)) {
+        $resultado = 'Informe um endereço de e-mail válido.';
+    } else {
+        if ($campo === 'cpf') {
+            $novoDado = preg_replace('/\D/', '', $novoDado);
+        }
+        $resultado = $atualizar->atualizarTutor($conexao, $codigo, $campo, $novoDado);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -40,11 +53,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
     </ul>
 
     <form method="POST">
-        <label>Código:</label><br>
-        <input type="number" id="codigo" name="codigo"/><br><br>
+        <label for="codigo" class="form-label text-white">Código:</label><br>
+        <input type="number" id="codigo" name="codigo" class="form-control" min="1" required/><br><br>
 
-        <label>Escolha o campo que deseja atualizar</label><br>
-        <select name="campo" id="campo">
+        <label for="campo" class="form-label text-white">Escolha o campo que deseja atualizar</label><br>
+        <select name="campo" id="campo" class="form-control" required>
             <option value="nome">Nome</option>
             <option value="cpf">CPF</option>
             <option value="telefone">Telefone</option>
@@ -52,8 +65,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
             <option value="endereco">Endereço</option>
         </select><br><br>
 
-        <label>Informe o novo dado:</label><br>
-        <input type="text" name="novoDado" id="novoDado"/><br><br>
+        <label for="novoDado" class="form-label text-white">Informe o novo dado:</label><br>
+        <input type="text" name="novoDado" id="novoDado" class="form-control" required/><br><br>
 
         <button type="submit" class="btn btn-success">Atualizar</button>
     </form>

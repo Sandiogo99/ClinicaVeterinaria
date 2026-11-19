@@ -11,8 +11,12 @@ $excluir = new Excluir();
 $resultado = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
-    $codigo = (int)$_POST['codigo'];
-    $resultado = $excluir->excluirAnimal($conexao, $codigo);
+    $codigo = filter_var($_POST['codigo'], FILTER_VALIDATE_INT);
+    if ($codigo === false || $codigo < 1) {
+        $resultado = 'Informe um código válido maior que zero.';
+    } else {
+        $resultado = $excluir->excluirAnimal($conexao, $codigo);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -36,9 +40,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigo'])){
         <li class="nav-item"><a class="nav-link active" href="excluirAnimal.php">Excluir</a></li>
     </ul>
 
-    <form method="POST">
-        <label>Código:</label><br>
-        <input type="number" id="codigo" name="codigo"/><br><br>
+    <form method="POST" onsubmit="return confirm('Deseja realmente excluir este animal?');">
+        <label for="codigo" class="form-label text-dark">Código:</label><br>
+        <input type="number" id="codigo" name="codigo" class="form-control" min="1" required/><br><br>
 
         <button type="submit" class="btn btn-danger">Excluir</button>
     </form>

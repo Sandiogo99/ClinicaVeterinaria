@@ -11,13 +11,21 @@ $inserir = new Inserir();
 $mensagem = "";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
-    $nome = $_POST['nome'];
-    $especie = $_POST['especie'];
-    $raca = $_POST['raca'];
-    $idade = (int)$_POST['idade'];
-    $codigoTutor = (int)$_POST['codigoTutor'];
+    $nome = trim($_POST['nome']);
+    $especie = trim($_POST['especie']);
+    $raca = trim($_POST['raca']);
+    $idade = filter_var($_POST['idade'] ?? '', FILTER_VALIDATE_INT);
+    $codigoTutor = filter_var($_POST['codigoTutor'] ?? '', FILTER_VALIDATE_INT);
 
-    $mensagem = $inserir->cadastrarAnimal($conexao, $nome, $especie, $raca, $idade, $codigoTutor);
+    if ($nome === '' || $especie === '' || $raca === '' || $idade === false || $codigoTutor === false) {
+        $mensagem = 'Preencha todos os campos com valores válidos.';
+    } elseif ($idade < 0) {
+        $mensagem = 'A idade não pode ser negativa.';
+    } elseif ($codigoTutor < 1) {
+        $mensagem = 'Informe um código de tutor válido maior que zero.';
+    } else {
+        $mensagem = $inserir->cadastrarAnimal($conexao, $nome, $especie, $raca, $idade, $codigoTutor);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -44,20 +52,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'])){
     </div>
 
     <form method="POST">
-        <label>Nome do Pet:</label><br>
-        <input type="text" id="nome" name="nome"/><br><br>
+        <label for="nome" class="form-label text-dark">Nome do Pet:</label><br>
+        <input type="text" id="nome" name="nome" class="form-control" maxlength="150" required/><br><br>
 
-        <label>Espécie:</label><br>
-        <input type="text" id="especie" name="especie"/><br><br>
+        <label for="especie" class="form-label text-dark">Especie:</label><br>
+        <input type="text" id="especie" name="especie" class="form-control" maxlength="50" required/><br><br>
 
-        <label>Raça:</label><br>
-        <input type="text" id="raca" name="raca"/><br><br>
+        <label for="raca" class="form-label text-dark">Raça:</label><br>
+        <input type="text" id="raca" name="raca" class="form-control" maxlength="50" required/><br><br>
 
-        <label>Idade:</label><br>
-        <input type="number" id="idade" name="idade"/><br><br>
+        <label for="idade" class="form-label text-dark">Idade:</label><br>
+        <input type="number" id="idade" name="idade" class="form-control" min="0" required/><br><br>
 
-        <label>Código do Tutor:</label><br>
-        <input type="number" id="codigoTutor" name="codigoTutor"/><br><br>
+        <label for="codigoTutor" class="form-label text-dark">Código do Tutor:</label><br>
+        <input type="number" id="codigoTutor" name="codigoTutor" class="form-control" min="1" required/><br><br>
 
         <button type="submit" class="btn btn-warning">Cadastrar</button>
     </form>

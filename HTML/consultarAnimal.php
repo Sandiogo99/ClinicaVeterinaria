@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </ul>
 
     <form method="POST" action="consultarAnimal.php">
-        <label for="codigo">Código:</label><br>
+        <label for="codigo" class="form-label text-dark">Código:</label><br>
         <input type="number" id="codigo" name="codigo" min="1" required
                value="<?= htmlspecialchars(is_string($codigoInformado) ? $codigoInformado : '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><br><br>
         <button type="submit" class="btn btn-warning">Consultar</button>

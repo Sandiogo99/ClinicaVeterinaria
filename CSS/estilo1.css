@@ -6,8 +6,9 @@ body{
 } 
 
 #animal{
-    background-image: url('../imagens/animal4.jpg');
-    background-color: #777;
+    background-image: url('../imagens/cachorro5.png');
+     background-repeat: no-repeat;
+  
 }
 
 #tutor{
